@@ -1,162 +1,79 @@
-// ===============================================
-// SESIÓN 01 - Variables y Console.log
-// Duración: 40 minutos
-// Objetivos de hoy:
-// • Entender qué es una variable y por qué la necesitamos
-// • Aprender las diferencias entre let, const y var
-// • Usar console.log para depurar y ver nuestros resultados
-// • Dominar los template literals para concatenar texto
-// ===============================================
+// Session 01 - Comments, Variables and Console.log
 
 // ===============================================
-// ¿QUÉ ES UNA VARIABLE?
-// ===============================================
-// Una variable es como una caja donde guardamos información
-// Podemos cambiar lo que hay dentro (si es let) o dejarlo fijo (si es const)
-
-// Aquí explicaremos la diferencia fundamental entre let y const
-// let = podemos cambiar el valor después
-// const = el valor es constante, no puede cambiar
-
-// Ejemplo con let (valor que puede cambiar)
-let edad = 25;
-console.log("Mi edad es:", edad);
-
-// Ahora podemos cambiarla
-edad = 26;
-console.log("El año que viene mi edad será:", edad);
-
-// Ejemplo con const (valor que NO puede cambiar)
-const nombre = "Ana";
-console.log("Mi nombre es:", nombre);
-
-// Si intentamos cambiar una constante, dará error
-// nombre = "María";  // Esto daría error, descomenten para verlo
-
-// ===============================================
-// ¿Y QUÉ ES VAR?
-// ===============================================
-// var es la forma antigua de declarar variables
-// En clase veremos el error típico de usar var en lugar de let/const
-
-var apellido = "García";
-console.log("Mi apellido es:", apellido);
-
-// Problema de var: se puede redeclarar (esto puede causar bugs)
-var apellido = "López";  // Esto no da error, pero es confuso
-console.log("Ahora mi apellido es:", apellido);
-
-// Pregunta para la clase: ¿por qué creen que let y const son mejores que var?
-
-// ===============================================
-// TEMPLATE LITERALS (COMO CONCATENAR TEXTO FÁCIL)
-// ===============================================
-// Los template literals usan comillas invertidas (``) en lugar de comillas normales
-// Nos permiten meter variables directamente con ${variable}
-
-// Forma antigua (con +)
-let mensajeAntiguo = "Hola, me llamo " + nombre + " y tengo " + edad + " años";
-console.log(mensajeAntiguo);
-
-// Forma moderna (con template literals)
-let mensajeModerno = `Hola, me llamo ${nombre} y tengo ${edad} años`;
-console.log(mensajeModerno);
-
-// Aquí explicaremos por qué los template literals son mejores:
-// 1. Más legibles
-// 2. No hay que preocuparse por espacios
-// 3. Podemos hacer cálculos dentro
-
-let ciudad = "Madrid";
-let presentacion = `Soy ${nombre} de ${ciudad} y el año que viene cumpliré ${edad + 1} años`;
-console.log(presentacion);
-
-// ===============================================
-// EJEMPLOS PRÁCTICOS PARA CLASE
+// 1. COMMENTS
 // ===============================================
 
-// Ejemplo 1: Calculadora de edad futura
-let añoActual = 2025;
-let añoNacimiento = 1998;
-let edadCalculada = añoActual - añoNacimiento;
+// Single-line comment: Use // to ignore text following it on that line.
+// Example: This does not execute
 
-console.log(`Nací en ${añoNacimiento} y en ${añoActual} tengo ${edadCalculada} años`);
-
-// Ejemplo 2: Información de un producto
-const nombreProducto = "iPhone 15";
-let precioProducto = 999;
-let stockProducto = 50;
-
-console.log(`Producto: ${nombreProducto}`);
-console.log(`Precio: ${precioProducto}€`);
-console.log(`Stock disponible: ${stockProducto} unidades`);
-
-// Ejemplo 3: Cálculo de descuento
-let precioOriginal = 100;
-let porcentajeDescuento = 20;
-let precioFinal = precioOriginal - (precioOriginal * porcentajeDescuento / 100);
-
-console.log(`Precio original: ${precioOriginal}€`);
-console.log(`Descuento: ${porcentajeDescuento}%`);
-console.log(`Precio final: ${precioFinal}€`);
+/*
+  Block comment:
+  Used for multi-line comments.
+  Starts with /* and ends with * /
+*/
 
 // ===============================================
-// ERRORES COMUNES QUE VEREMOS EN CLASE
+// 2. VARIABLES
 // ===============================================
 
-// Error 1: Intentar cambiar una constante
-// const PI = 3.1416;
-// PI = 3.14;  // Esto daría error
+/*
+  In JavaScript there are three ways to declare variables:
+  1. var (old way, avoid modern use)
+  2. let (modern standard for variables that can change)
+  3. const (modern standard for constants that DO NOT change)
+*/
 
-// Error 2: Usar var y tener problemas de scope
-// if (true) {
-//   var x = 10;
-// }
-// console.log(x);  // Con var esto funciona, con let daría error
+// --- VAR ---
+// Has function or global scope.
+// Can be redeclared and reassigned.
+var variableVar = "I am a var variable";
+console.log(variableVar);
 
-// Error 3: Olvidar declarar una variable
-// miVariable = 5;  // Esto crea una variable global (mala práctica)
+// --- LET ---
+// Has block scope (what is between {}).
+// Can be reassigned, but NOT redeclared in the same scope.
+let variableLet = "I am a let variable";
+console.log(variableLet);
 
-// Cuidado con este error común: usar const para objetos que sí pueden modificar sus propiedades
-const persona = {
-  nombre: "Carlos",
-  edad: 30
-};
+variableLet = "I have changed value"; // This is valid
+console.log(variableLet);
 
-// Esto SÍ se puede hacer (cambiar una propiedad del objeto)
-persona.edad = 31;
-console.log(`Ahora ${persona.nombre} tiene ${persona.edad} años`);
+// --- CONST ---
+// Has block scope.
+// CANNOT be reassigned or redeclared.
+const variableConst = "I am a constant";
+console.log(variableConst);
 
-// Esto NO se puede hacer (cambiar el objeto completo)
-// persona = { nombre: "Otro", edad: 25 };  // Esto daría error
+// variableConst = "New value"; // Error! Cannot reassign a constant.
 
 // ===============================================
-// EJERCICIOS PARA HACER EN CLASE
+// 3. SCOPE (ALCANCE)
 // ===============================================
 
-// Ejercicio 1 → Crea una variable llamada "puntuacion" que empiece en 0
-// TODO: Declara la variable puntuacion con valor inicial 0
+{
+  let scopeBlock = "I only exist inside here";
+  var scopeFunctional = "I exist outside the block too";
+  console.log("Inside block:", scopeBlock);
+}
 
-// Ejercicio 2 → Incrementa la puntuación en 10 puntos y muéstrala en consola
-// TODO: Suma 10 a puntuacion y muestra el resultado con console.log
+// console.log(scopeBlock); // Error: scopeBlock is not defined
+console.log("Outside block:", scopeFunctional); // Works because it is var
 
-// Ejercicio 3 → Crea una constante con tu nombre y otra con tu edad
-// TODO: Declara const miNombre y const miEdad
+// ===============================================
+// EXERCISES (No Solutions)
+// ===============================================
 
-// Ejercicio 4 → Usa template literals para presentar tu nombre y edad
-// TODO: Crea un mensaje que diga "Me llamo [nombre] y tengo [edad] años"
+// 1. Write a single-line comment saying "Exercise 1".
 
-// Ejercicio 5 → Crea variables para un coche: marca (const), modelo (const), año (let)
-// TODO: Declara las variables del coche
+// 2. Write a multi-line comment explaining what a variable is.
 
-// Ejercicio 6 → Actualiza el año del coche al año siguiente y muestra la información
-// TODO: Cambia el año y muestra toda la info del coche en consola
+// 3. Declare a variable named `name` using `let` and assign your name to it.
 
-// Ejercicio 7 → Calcula el precio con IVA de un producto
-// TODO: Crea variable precioSinIva (const), iva (const), calcula precioConIva
+// 4. Declare a variable named `age` using `const` and assign your age to it.
 
-// Ejercicio 8 → Crea un mensaje de bienvenida personalizado
-// TODO: Usa template literals para crear un mensaje que incluya nombre, día y mes
-// Pista: puedes usar new Date().getDay() y new Date().getMonth() + 1
+// 5. Try to reassign the value of `age` in the next line (keep the code commented out so it doesn't break execution).
 
-console.log("¡Fin de la sesión 01! ¡Repasen los ejercicios en casa!");
+// 6. Create a variable `price` and print it to the console. Then change its value and print it again.
+
+// 7. Declare two variables with different data types (e.g., string and number) and print their values separated by a comma in a single console.log.
